@@ -1,0 +1,139 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.turingatemyhamster</groupId>
+    <artifactId>turingatemyhamster_parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>${project.artifactId}</name>
+    <description>mt genome primer hunter</description>
+    <inceptionYear>2013</inceptionYear>
+    <packaging>pom</packaging>
+    <licenses>
+        <license>
+            <name>My License</name>
+            <url>http://....</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <encoding>UTF-8</encoding>
+        <scala.version>2.10.2</scala.version>
+    </properties>
+
+    <repositories>
+        <repository>
+          <id>oss.sonatype.org-releases</id>
+          <name>releases</name>
+          <url>https://oss.sonatype.org/content/repositories/releases</url>
+        </repository>
+
+        <repository>
+          <id>oss.sonatype.org-snapshots</id>
+          <name>snapshots</name>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+
+        <repository>
+          <id>central</id>
+          <name>Maven repository</name>
+          <url>http://repo1.maven.org/maven2</url>
+        </repository>
+    </repositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.scala-lang</groupId>
+                <artifactId>scala-library</artifactId>
+                <version>${scala.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.scopt</groupId>
+                <artifactId>scopt_2.10</artifactId>
+                <version>2.1.0</version>
+            </dependency>
+
+            <!-- Test -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.11</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.specs2</groupId>
+                <artifactId>specs2_2.10</artifactId>
+                <version>1.14</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.scala-tools</groupId>
+                    <artifactId>maven-scala-plugin</artifactId>
+                    <version>2.15.2</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>compile</goal>
+                                <goal>testCompile</goal>
+                            </goals>
+                            <configuration>
+                                <args>
+                                    <arg>-make:transitive</arg>
+                                    <arg>-dependencyfile</arg>
+                                    <arg>${project.build.directory}/.scala_dependencies</arg>
+                                </args>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.6</version>
+                    <configuration>
+                        <useFile>false</useFile>
+                        <disableXmlReport>true</disableXmlReport>
+                        <!-- If you have classpath issue like NoDefClassError,... -->
+                        <!-- useManifestOnlyJar>false</useManifestOnlyJar -->
+                        <includes>
+                            <include>**/*Test.*</include>
+                            <include>**/*Suite.*</include>
+                            <include>**/*Spec.*</include>
+                        </includes>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.scalaxb</groupId>
+                    <artifactId>scalaxb-maven-plugin</artifactId>
+                    <version>1.1.2</version>
+                    <executions>
+                        <execution>
+                            <id>scalaxb</id>
+                            <goals>
+                                <goal>generate</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.scala-lang</groupId>
+                            <artifactId>scala-library</artifactId>
+                            <version>${scala.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
+
