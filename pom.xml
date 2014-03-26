@@ -1,25 +1,45 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
     <groupId>uk.co.turingatemyhamster</groupId>
     <artifactId>turingatemyhamster_parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.1-snapshot</version>
     <name>${project.artifactId}</name>
-    <description>mt genome primer hunter</description>
+    <description>Parent pom to collect lots of common settings together in one place.</description>
     <inceptionYear>2013</inceptionYear>
     <packaging>pom</packaging>
     <licenses>
         <license>
-            <name>My License</name>
-            <url>http://....</url>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
+
+    <scm>
+        <connection>scm:git:https://github.com/drdozer/turingatemyhamster_parent.git</connection>
+        <url>https://github.com/drdozer/turingatemyhamster_parent</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>Matthew Pocock</name>
+            <email>turingatemyhamster@gmail.com</email>
+        </developer>
+    </developers>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <encoding>UTF-8</encoding>
-        <scala.version>2.10.2</scala.version>
+        <scala.version>2.10.4</scala.version>
+        <scala.epoc>2.10</scala.epoc>
     </properties>
 
     <repositories>
@@ -52,7 +72,7 @@
 
             <dependency>
                 <groupId>com.github.scopt</groupId>
-                <artifactId>scopt_2.10</artifactId>
+                <artifactId>scopt_${scala.epoc}</artifactId>
                 <version>2.1.0</version>
             </dependency>
 
@@ -65,13 +85,13 @@
             </dependency>
             <dependency>
                 <groupId>org.specs2</groupId>
-                <artifactId>specs2_2.10</artifactId>
+                <artifactId>specs2_${scala.epoc}</artifactId>
                 <version>1.14</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.scalacheck</groupId>
-                <artifactId>scalacheck_2.10</artifactId>
+                <artifactId>scalacheck_${scala.epoc}</artifactId>
                 <version>1.10.1</version>
             </dependency>
         </dependencies>
@@ -140,5 +160,6 @@
             </plugins>
         </pluginManagement>
     </build>
+
 </project>
 
